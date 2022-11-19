@@ -9,6 +9,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -87,7 +88,7 @@ public class JsonLdPerformanceTest {
 
     private void testCompaction(String label, InputStream nextInputStream)
             throws IOException, FileNotFoundException, JsonLdError {
-        final File testFile = File.createTempFile("jsonld-perf-source-", ".jsonld", testDir);
+        final File testFile = Files.createTempFile(testDir.toPath(), "jsonld-perf-source-", ".jsonld").toFile();
         FileUtils.copyInputStreamToFile(nextInputStream, testFile);
 
         final LongSummaryStatistics parseStats = new LongSummaryStatistics();
